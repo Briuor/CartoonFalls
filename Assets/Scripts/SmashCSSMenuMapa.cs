@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 
-public class SmashCSS : MonoBehaviour
+public class SmashCSSMenuMapa : MonoBehaviour
 {
 
     private GridLayoutGroup gridLayout;
@@ -15,7 +15,7 @@ public class SmashCSS : MonoBehaviour
     public Vector2 slotArtworkSize;
 
 
-    public static SmashCSS instance;
+    public static SmashCSSMenuMapa instance;
     [Header("Characters List")]
     public List<Character> characters = new List<Character>();
     [Space]
@@ -35,9 +35,10 @@ public class SmashCSS : MonoBehaviour
 
     void Start()
     {
-
+        Debug.Log("player 1 recebido: " + PlayerPrefs.GetString("Player1"));
+        Debug.Log("player 2 recebido: " + PlayerPrefs.GetString("Player2"));
         gridLayout = GetComponent<GridLayoutGroup>();
-        GetComponent<RectTransform>().sizeDelta = new Vector2(gridLayout.cellSize.x * 5, gridLayout.cellSize.y * 2);
+        GetComponent<RectTransform>().sizeDelta = new Vector2(gridLayout.cellSize.x * 1, gridLayout.cellSize.y * 1);
         RectTransform gridBG = Instantiate(gridBgPrefab, transform.parent).GetComponent<RectTransform>();
         gridBG.transform.SetSiblingIndex(transform.GetSiblingIndex());
         gridBG.sizeDelta = GetComponent<RectTransform>().sizeDelta;
@@ -117,18 +118,17 @@ public class SmashCSS : MonoBehaviour
         {
             confirmedCharacterPlayer1 = character;
             playerSlotsContainer.GetChild(player).DOPunchPosition(Vector3.down * 3, .3f, 10, 1);
-            // Debug.Log("Player 1: " + character.characterName);
-            PlayerPrefs.SetString("Player1", character.characterName);
+            Debug.Log("Player 1: " + character.characterName);
         }
 
         else
         {
             confirmedCharacterPlayer2 = character;
             playerSlotsContainer.GetChild(player).DOPunchPosition(Vector3.down * 3, .3f, 10, 1);
-            // Debug.Log("Player 2: " + character.characterName);
+            Debug.Log("Player 2: " + character.characterName);
             // MUDA DE CENA
-            PlayerPrefs.SetString("Player2", character.characterName);
-            SceneManager.LoadScene("Menu_Mapa", LoadSceneMode.Single);
+            // SceneManager.LoadScene("Menu_Mapa", LoadSceneMode.Single);
+
         }
     }
 
