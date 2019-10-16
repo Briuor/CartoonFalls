@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 2927493527122217303}
   - component: {fileID: 2927493527122217302}
   - component: {fileID: 2927493527122217301}
+  - component: {fileID: 884251833}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -196,21 +197,138 @@ MonoBehaviour:
   speed: 5
   isJumping: 0
   jumpForce: 10
+  moveInput: 0
   groundCheck: {fileID: 2927493526389110608}
   checkRadius: 0.5
   ground:
     serializedVersion: 2
     m_Bits: 256
+  extraJumps: 0
   extraJumpsValue: 1
   vel: 0
   player2: 0
   anim: {fileID: 2927493527122217302}
   jumpDust: {fileID: 455103721024249621, guid: 2398187b35b49ec48820b1a6531de70c, type: 3}
+  punchClips:
+  - {fileID: 8300000, guid: a110b427ed8dba64ab67aa4d113883f6, type: 3}
+  - {fileID: 8300000, guid: 5f0fd1518caae38498d081fafb5a27a1, type: 3}
+  - {fileID: 8300000, guid: 2b3045a5dfd603e4da04d255ffad8d10, type: 3}
+  - {fileID: 8300000, guid: ac76b13afa6552140a30ea2b8f65e1b3, type: 3}
+  jumpClips:
+  - {fileID: 8300000, guid: fa1035b3345141342adee4c5fa873d4e, type: 3}
+  - {fileID: 8300000, guid: ce8d5b3f7eebce5438675a39451ee5d6, type: 3}
+  - {fileID: 8300000, guid: c42bb37144a1c984b9f84f499a757d1a, type: 3}
+  - {fileID: 8300000, guid: 5816512ef27d8a441b3d6330a7a60680, type: 3}
+  dodgeClips:
+  - {fileID: 8300000, guid: cf1e1cd33b6f14447b4b5a99b5fa5097, type: 3}
+  - {fileID: 8300000, guid: 5ab70f40c0a975342b5fbb0d66d87d87, type: 3}
+  - {fileID: 8300000, guid: f3d1875e39f76f0468bd77000ab23654, type: 3}
+  - {fileID: 8300000, guid: 389b9315f9d9ffa4e83032c0766fac72, type: 3}
+  doubleJumpClip: {fileID: 8300000, guid: d857a2977167d79408115c2832d74a23, type: 3}
+  powerup: {fileID: 8300000, guid: ab8e67c4ac4a42b40bd507df14affe67, type: 3}
   isPunching: 0
   damaged: 0
   weakness: 0
+  knockingBack: 0
   isDead: 0
   punchPlotter: {fileID: 2927493528253373073}
+  audioSource: {fileID: 884251833}
+--- !u!82 &884251833
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2927493527122217300}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2927493528253373072
 GameObject:
   m_ObjectHideFlags: 0

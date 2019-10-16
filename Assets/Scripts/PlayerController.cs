@@ -15,10 +15,18 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask ground;
-
+    [SerializeField]
     private int extraJumps;
     public int extraJumpsValue;
     public float vel = 0;
+
+    //Controller
+    KeyCode up;
+    KeyCode down;
+    KeyCode left;
+    KeyCode right;
+    KeyCode punch;
+    KeyCode defense;
 
     public bool player2 = false;
 
@@ -26,6 +34,12 @@ public class PlayerController : MonoBehaviour
     public Animator anim;
     public Transform jumpDust;
 
+    //Sounds
+    public AudioClip[] punchClips;
+    public AudioClip[] jumpClips;
+    public AudioClip[] dodgeClips;
+    public AudioClip doubleJumpClip;
+    public AudioClip powerup;
     // Damage
 
     public bool isPunching;
@@ -35,6 +49,7 @@ public class PlayerController : MonoBehaviour
     bool normalizingKnockback = false;
     public bool isDead;
     public Transform punchPlotter;
+    public AudioSource audioSource;
 
 
     // Start is called before the first frame update
@@ -44,6 +59,13 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
         playerCollider = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
+
+        up    = player2 ? KeyCode.I : KeyCode.W;
+        down  = player2 ? KeyCode.K : KeyCode.S;
+        left  = player2 ? KeyCode.J : KeyCode.A;
+        right = player2 ? KeyCode.L : KeyCode.D;
+        punch = player2 ? KeyCode.Comma : KeyCode.X;
+
     }
 
     private void Movement()
@@ -51,10 +73,7 @@ public class PlayerController : MonoBehaviour
         string xAxis = player2 ? "Horizontal_2" : "Horizontal_1";
         string yAxis = player2 ? "Vertical_2"   : "Vertical_1";
         
-        KeyCode up    = player2 ? KeyCode.I : KeyCode.W;
-        KeyCode down  = player2 ? KeyCode.K : KeyCode.S;
-        KeyCode left  = player2 ? KeyCode.J : KeyCode.A;
-        KeyCode right = player2 ? KeyCode.L : KeyCode.D;
+        
 
         if(!knockingBack){
             moveInput = Input.GetAxis(xAxis) * speed;
@@ -65,7 +84,10 @@ public class PlayerController : MonoBehaviour
                     rb.velocity = Vector2.up * jumpForce;
                     extraJumps--;
                     if(anim.GetBool("isJumping") || anim.GetBool("isFalling")){
+                        PlaySound("doublejump");
                         Instantiate(jumpDust, new Vector3(transform.position.x, (transform.position.y), 0), Quaternion.identity);
+                    }else{
+                        PlaySound("jump");
                     }
                 }
             }else if(Input.GetKeyDown(up) && extraJumps == 0 && isGrounded == true)
@@ -86,7 +108,7 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(NormalizeKnockback());
         }
-        // if(isGrounded == true) anim.SetBool("isJumping", false);
+        if(isGrounded == true) anim.SetBool("isJumping", false);
 
         rb.velocity = new Vector2(moveInput, rb.velocity.y);
         vel = rb.velocity.y;
@@ -95,8 +117,6 @@ public class PlayerController : MonoBehaviour
 
     private void AnimationController()
     {
-        KeyCode left  = player2 ? KeyCode.J : KeyCode.A;
-        KeyCode right = player2 ? KeyCode.L : KeyCode.D;
 
         if(moveInput < 0 && transform.rotation.y != 180) 
         {
@@ -112,12 +132,12 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("isMoving", false);
         }
         
-        if(vel > 0)
+        if(vel > 0 && !isGrounded)
         {
             anim.SetBool("isJumping", true);
             anim.SetBool("isFalling", false);
         }else 
-        if(vel < 0){
+        if(vel < 0 && !isGrounded){
             anim.SetBool("isJumping", false);
             anim.SetBool("isFalling", true);
         }else{
@@ -129,7 +149,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isGrounded == true)
+        isJumping = !isGrounded;
+        if (isGrounded)
         {
             extraJumps = extraJumpsValue;
         }
@@ -140,12 +161,42 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void PlaySound(string action)
+    {
+        AudioClip selectedClip = powerup;
+        switch(action)
+        {
+            case "punch":
+                selectedClip = punchClips[Random.Range(0, punchClips.Length-1)];
+            break;  
+             
+            case "jump":
+                selectedClip = jumpClips[Random.Range(0, jumpClips.Length-1)];
+            break;
+
+            case "doublejump":
+                selectedClip = doubleJumpClip;
+            break;
+
+            case "dodge":
+                selectedClip = dodgeClips[Random.Range(0, dodgeClips.Length-1)];                
+            break;
+
+            case "powerup":
+                selectedClip = powerup;
+            break;
+        }
+            audioSource.PlayOneShot(selectedClip);
+    }
+
     private void Punch()
     {
-        KeyCode punch = player2 ? KeyCode.Comma : KeyCode.X;
+        if(!isPunching && Input.GetKeyDown(punch))
+        {
+            isPunching = true;
+            PlaySound("punch");
+        }
 
-                
-        isPunching = !isPunching ? Input.GetKeyDown(punch) : isPunching;
         punchPlotter.gameObject.SetActive(isPunching);
 
         if(isPunching) StartCoroutine(ReleasePunch());
@@ -156,6 +207,8 @@ public class PlayerController : MonoBehaviour
         int side = transform.rotation.y == 180 ? -1 : 1;
         other.gameObject.GetComponent<PlayerController>().ReceiveDamage(gameObject);
     }
+
+
 
     public void ReceiveDamage(GameObject other)
     {
