@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2927493526389110615}
   m_LocalRotation: {x: -0, y: -0, z: -1, w: 0}
-  m_LocalPosition: {x: -0.36, y: -10.32, z: -0.10546875}
+  m_LocalPosition: {x: 0, y: -11.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2927493527122217298}
@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 2927493527122217302}
   - component: {fileID: 2927493527122217301}
   - component: {fileID: 884251833}
+  - component: {fileID: 2032135319907336328}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -199,12 +200,13 @@ MonoBehaviour:
   jumpForce: 10
   moveInput: 0
   groundCheck: {fileID: 2927493526389110608}
-  checkRadius: 0.5
+  checkRadius: 0.05
   ground:
     serializedVersion: 2
     m_Bits: 256
   extraJumps: 0
   extraJumpsValue: 1
+  jumpDelay: 0
   vel: 0
   player2: 0
   anim: {fileID: 2927493527122217302}
@@ -329,6 +331,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2032135319907336328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2927493527122217300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0209c81e5cef72b498bc7ddb655f4c4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2927493528253373072
 GameObject:
   m_ObjectHideFlags: 0

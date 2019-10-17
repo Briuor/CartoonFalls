@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private int extraJumps;
     public int extraJumpsValue;
+    [SerializeField]
+    private float jumpDelay = 0;
     public float vel = 0;
 
     //Controller
@@ -79,9 +81,13 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKeyDown(up))
             {
-                if(extraJumps > 0){
+
+                if(extraJumps > 0 && (Time.time - jumpDelay) > 0.1f){
+                    jumpDelay = Time.time;
                     rb.velocity = Vector2.up * jumpForce;
-                    extraJumps--;
+                    if(!isGrounded){
+                        extraJumps--;
+                    }
                     if(anim.GetBool("isJumping") || anim.GetBool("isFalling")){
                         PlaySound("doublejump");
                         Instantiate(jumpDust, new Vector3(transform.position.x, (transform.position.y), 0), Quaternion.identity);
