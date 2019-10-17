@@ -24,7 +24,16 @@ public class PowerUp : MonoBehaviour {
 
     IEnumerator Pickup(Collider2D player)
     {
-        Debug.Log("Colidiu!");
+        // Visual pickup effect
+        Instantiate(pickupEffect, transform.position, transform.rotation);
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+
+        if (audioSource != null)
+        {
+            audioSource.PlayOneShot(powerUpClip);
+        }
+        
         PlayerController stats = player.GetComponent<PlayerController>();
         // Apply powerUp effect
         switch(powerUpID)
@@ -56,17 +65,6 @@ public class PowerUp : MonoBehaviour {
                 stats.jumpForce *= multiplier;
             break;
         }
-
-        // Visual pickup effect
-        Instantiate(pickupEffect, transform.position, transform.rotation);
-        GetComponent<SpriteRenderer>().enabled = false;
-        GetComponent<Collider2D>().enabled = false;
-
-        if (audioSource != null)
-        {
-            audioSource.PlayOneShot(powerUpClip);
-        }
-
         Destroy(this.gameObject);
     }
 
