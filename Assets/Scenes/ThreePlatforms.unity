@@ -751,7 +751,7 @@ PrefabInstance:
     - target: {fileID: 2927493527122217298, guid: 6a707f45ea62a134ab166d8068addcd6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.5216074
+      value: 1.46
       objectReference: {fileID: 0}
     - target: {fileID: 2927493527122217298, guid: 6a707f45ea62a134ab166d8068addcd6,
         type: 3}
@@ -807,6 +807,16 @@ PrefabInstance:
         type: 3}
       propertyPath: player2
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927493527122217301, guid: 6a707f45ea62a134ab166d8068addcd6,
+        type: 3}
+      propertyPath: damaged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927493527122217301, guid: 6a707f45ea62a134ab166d8068addcd6,
+        type: 3}
+      propertyPath: knockingBack
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a707f45ea62a134ab166d8068addcd6, type: 3}
@@ -1056,6 +1066,51 @@ TilemapCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.04, y: -0.17}
   m_MaximumTileChangeCount: 1000
+--- !u!1 &1604887691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1604887692}
+  - component: {fileID: 1604887693}
+  m_Layer: 0
+  m_Name: PowerUpSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1604887692
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604887691}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.68, y: 0.03, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1604887693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604887691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0726a0c4732205e47b9d7800628b0bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUp: {fileID: 5953468007586410695, guid: de4180136a8d32d4a81732ab2a7db513, type: 3}
+  spawnRate: 30
 --- !u!1 &1732301361
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,7 +1172,7 @@ PrefabInstance:
     - target: {fileID: 2927493527122217298, guid: 6a707f45ea62a134ab166d8068addcd6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.22
+      value: -0.76
       objectReference: {fileID: 0}
     - target: {fileID: 2927493527122217298, guid: 6a707f45ea62a134ab166d8068addcd6,
         type: 3}
@@ -1167,6 +1222,31 @@ PrefabInstance:
     - target: {fileID: 2927493527122217298, guid: 6a707f45ea62a134ab166d8068addcd6,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927493527122217298, guid: 6a707f45ea62a134ab166d8068addcd6,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927493527122217298, guid: 6a707f45ea62a134ab166d8068addcd6,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927493527122217301, guid: 6a707f45ea62a134ab166d8068addcd6,
+        type: 3}
+      propertyPath: player2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927493527122217297, guid: 6a707f45ea62a134ab166d8068addcd6,
+        type: 3}
+      propertyPath: m_DrawMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927493527122217296, guid: 6a707f45ea62a134ab166d8068addcd6,
+        type: 3}
+      propertyPath: m_EdgeRadius
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

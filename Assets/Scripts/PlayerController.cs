@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour
     public AudioClip[] jumpClips;
     public AudioClip[] dodgeClips;
     public AudioClip doubleJumpClip;
-    public AudioClip powerup;
     // Damage
 
     public bool isPunching;
@@ -163,7 +162,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlaySound(string action)
     {
-        AudioClip selectedClip = powerup;
+        AudioClip selectedClip = null;
         switch(action)
         {
             case "punch":
@@ -180,10 +179,6 @@ public class PlayerController : MonoBehaviour
 
             case "dodge":
                 selectedClip = dodgeClips[Random.Range(0, dodgeClips.Length-1)];                
-            break;
-
-            case "powerup":
-                selectedClip = powerup;
             break;
         }
             audioSource.PlayOneShot(selectedClip);
@@ -207,8 +202,6 @@ public class PlayerController : MonoBehaviour
         int side = transform.rotation.y == 180 ? -1 : 1;
         other.gameObject.GetComponent<PlayerController>().ReceiveDamage(gameObject);
     }
-
-
 
     public void ReceiveDamage(GameObject other)
     {
@@ -255,8 +248,6 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
-
 
     IEnumerator NormalizeKnockback()
     {
