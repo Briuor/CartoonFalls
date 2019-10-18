@@ -2,76 +2,62 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PowerUpType : int
+{
+    TRIPLE_JUMP,
+    SUPER_PUNCH,
+    ULTRA_RIGID,
+    ULTRA_SPEED,
+    ULTRA_SLOW,
+    FEATHER_WEIGHT,
+    BAD_LUCKY
+
+}
+
 public class PowerUp : MonoBehaviour {
-    public float multiplier = 1.4f;
-    public float duration = 4f;
+    private float duration = 10f;
+    private float lifetime = 15f;
     public GameObject pickupEffect;
     public AudioClip powerUpClip;
     public AudioSource audioSource;
     public PowerUpType powerUpID;
 
-    public void setRandomPowerUpType() {
+    void Start()
+    {
+        audioSource.PlayOneShot(powerUpClip);
         powerUpID = (PowerUpType) Random.Range(0, System.Enum.GetValues(typeof(PowerUpType)).Length);
         Debug.Log(powerUpID);
     }
     private void OnTriggerEnter2D(Collider2D other) 
-    {
+    {   
         if(other.CompareTag("Player"))
         {
-            StartCoroutine( Pickup(other) );
-        }    
+            Pickup(other);
+        } 
+        else if(other.CompareTag("Finish"))
+        {
+                Destroy(this.gameObject);
+        }
+        else 
+        {
+             Destroy(this.gameObject, lifetime);
+        } 
     }
 
-    IEnumerator Pickup(Collider2D player)
-    {
+    private void Pickup(Collider2D playerDetected)
+    {   
+        // Catching the player
+        PlayerController player = playerDetected.GetComponent<PlayerController>();
+
         // Visual pickup effect
         Instantiate(pickupEffect, transform.position, transform.rotation);
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<Collider2D>().enabled = false;
-
-        if (audioSource != null)
-        {
-            audioSource.PlayOneShot(powerUpClip);
-        }
         
-        PlayerController stats = player.GetComponent<PlayerController>();
-        // Apply powerUp effect
-        switch(powerUpID)
-        {
-            /*case PowerUpType.TRIPLE_JUMP:
-            break;
-            
-            case PowerUpType.SUPER_PUNCH:
-            break;
+        audioSource.PlayOneShot(powerUpClip);
+        
+        player.PowerUpOn(this.powerUpID,this.duration);
 
-            case PowerUpType.ULTRA_RIGID:
-            break;
-
-            case PowerUpType.ULTRA_SLOW:
-            break;*/
-
-            case PowerUpType.ULTRA_SPEED:
-                stats.speed *= multiplier;
-                yield return new WaitForSeconds(duration);
-                stats.speed /= multiplier;
-            break;
-
-            //case PowerUpType.FEATHER_WEIGHT:
-            //break;
-
-            case PowerUpType.BAD_LUCKY:
-                stats.jumpForce /= multiplier;
-                yield return new WaitForSeconds(duration);
-                stats.jumpForce *= multiplier;
-            break;
-        }
         Destroy(this.gameObject);
-    }
-
-    public enum PowerUpType : int
-    {
-        ULTRA_SPEED,
-        BAD_LUCKY
-
     }
 }

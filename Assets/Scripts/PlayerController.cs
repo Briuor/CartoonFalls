@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private float jumpDelay = 0;
     public float vel = 0;
 
+
     //Controller
     KeyCode up;
     KeyCode down;
@@ -65,7 +66,7 @@ public class PlayerController : MonoBehaviour
         down  = player2 ? KeyCode.K : KeyCode.S;
         left  = player2 ? KeyCode.J : KeyCode.A;
         right = player2 ? KeyCode.L : KeyCode.D;
-        punch = player2 ? KeyCode.Comma : KeyCode.X;
+        punch = player2 ? KeyCode.M : KeyCode.F;
 
     }
 
@@ -246,7 +247,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.25F);
         isPunching = false;
     }
-        private void OnTriggerExit2D(Collider2D other) 
+    private void OnTriggerExit2D(Collider2D other) 
     {
         if(other.gameObject.name == "SafeArea"){
             isDead = true;
@@ -268,9 +269,101 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         
-        if(other.gameObject.tag == "Player" && !GameObject.ReferenceEquals(other.gameObject, gameObject)){
+        if(other.CompareTag("Player") && !GameObject.ReferenceEquals(other.gameObject, gameObject)){
             Damage(other);
         }
     }
 
+    // Player powerUp functions
+    public void PowerUpOn(PowerUpType powerUpType, float duration)
+    {
+        // Apply powerUp effect
+        switch(powerUpType)
+        {
+            case PowerUpType.TRIPLE_JUMP:
+                Debug.Log("TripleJump condition!");
+                StartCoroutine(this.TripleJumpPowerUp(duration));
+                break;
+            
+            case PowerUpType.SUPER_PUNCH:
+                Debug.Log("SuperPunch condition!");
+                StartCoroutine(this.SuperPunchPowerUp(duration));
+                break;
+
+            case PowerUpType.ULTRA_RIGID:
+                Debug.Log("UltraRigid condition!");
+                StartCoroutine(this.UltraRigidPowerUp(duration));
+                break;
+
+            case PowerUpType.ULTRA_SLOW:
+                Debug.Log("UltraSlow!");
+                StartCoroutine(this.UltraSlowPowerUp(duration));
+                break;
+
+            case PowerUpType.ULTRA_SPEED:
+                Debug.Log("UltraSpeed condition!");
+                StartCoroutine(this.UltraSpeedPowerUp(duration));
+                break;
+
+            case PowerUpType.FEATHER_WEIGHT:
+                Debug.Log("FeatherWeight condition!");
+                StartCoroutine(this.FeatherWeightPowerUp(duration));
+                break;
+
+            case PowerUpType.BAD_LUCKY:
+                Debug.Log("BadLucky condition!");
+                StartCoroutine(this.BadLuckyPowerUp(duration));
+                break;
+        }
+    }
+    public IEnumerator TripleJumpPowerUp(float time)
+    {
+        this.extraJumpsValue = 2;
+        yield return new WaitForSeconds(time);
+        this.extraJumpsValue = 1;
+    }
+
+    public IEnumerator SuperPunchPowerUp(float time)
+    {
+
+        yield return new WaitForSeconds(time);
+    }
+
+    public IEnumerator UltraRigidPowerUp(float time)
+    {
+        this.transform.localScale *= 2;
+        yield return new WaitForSeconds(time);
+        Debug.Log("Unbuff!");
+        this.transform.localScale /= 2;
+    }
+
+    public IEnumerator UltraSlowPowerUp(float time)
+    {   
+        speed /= 2;
+        yield return new WaitForSeconds(time);
+        Debug.Log("Unbuff!");
+        speed *= 2;
+    }
+
+    public IEnumerator UltraSpeedPowerUp(float time)
+    {
+        speed *= 10;
+        yield return new WaitForSeconds(time);
+        Debug.Log("Unbuff!");
+        speed /= 10;
+    }
+
+    public IEnumerator FeatherWeightPowerUp(float time)
+    {
+        weakness = 10;
+        yield return new WaitForSeconds(time);
+        Debug.Log("Unbuff!");
+        weakness = 0;
+    }
+
+    public IEnumerator BadLuckyPowerUp(float time)
+    {
+        yield return new WaitForSeconds(time);
+        isDead = true;
+    }
 }
