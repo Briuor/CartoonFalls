@@ -24,7 +24,7 @@ public class PowerUp : MonoBehaviour {
 
     void Start()
     {
-        audioSource.PlayOneShot(powerUpClip);
+        // audioSource.PlayOneShot(powerUpClip);
         powerUpID = (PowerUpType) Random.Range(0, System.Enum.GetValues(typeof(PowerUpType)).Length);
         Debug.Log(powerUpID);
     }
@@ -54,10 +54,11 @@ public class PowerUp : MonoBehaviour {
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<Collider2D>().enabled = false;
         
-        audioSource.PlayOneShot(powerUpClip);
+        audioSource.clip = powerUpClip;
+        audioSource.Play();
         
         player.PowerUpOn(this.powerUpID,this.duration);
 
-        Destroy(this.gameObject);
+        Destroy(this.gameObject, audioSource.clip.length);
     }
 }

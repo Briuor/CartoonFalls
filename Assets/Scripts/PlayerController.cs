@@ -347,18 +347,20 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator UltraSpeedPowerUp(float time)
     {
-        speed *= 10;
+        float save = speed;
+        speed *= 3;
         yield return new WaitForSeconds(time);
         Debug.Log("Unbuff!");
-        speed /= 10;
+        speed = save;
     }
 
     public IEnumerator FeatherWeightPowerUp(float time)
     {
-        weakness = 10;
+        float save = weakness;
+        weakness = 1.5f;
         yield return new WaitForSeconds(time);
         Debug.Log("Unbuff!");
-        weakness = 0;
+        weakness = save;
     }
 
     public IEnumerator BadLuckyPowerUp(float time)
