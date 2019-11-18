@@ -196,9 +196,10 @@ public class PlayerController : MonoBehaviour
         if(!isPunching && Input.GetKeyDown(punch))
         {
             isPunching = true;
+            anim.SetBool("isPunching", true);
             PlaySound("punch");
         }
-
+        
         punchPlotter.gameObject.SetActive(isPunching);
 
         if(isPunching) StartCoroutine(ReleasePunch());
@@ -246,6 +247,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.25F);
         isPunching = false;
+        anim.SetBool("isPunching", false);
     }
     private void OnTriggerExit2D(Collider2D other) 
     {
