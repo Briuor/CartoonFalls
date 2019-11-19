@@ -1017,6 +1017,7 @@ MonoBehaviour:
   slotArtworkSize: {x: 0, y: 0}
   characters:
   - {fileID: 11400000, guid: 1567f7f7dee27f640bb0d10ca9075759, type: 2}
+  - {fileID: 11400000, guid: c93d53cbdab4ce24b87acf9b515e89b8, type: 2}
   charCellPrefab: {fileID: 1518450411981782, guid: c53dadccb54e53441bcbddeabbab3a62,
     type: 3}
   gridBgPrefab: {fileID: 1656363544186126, guid: 1de47e36ee13e7d4a85a1dad97c2e372,
