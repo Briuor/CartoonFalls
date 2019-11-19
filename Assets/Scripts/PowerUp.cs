@@ -4,12 +4,13 @@ using UnityEngine;
 
 public enum PowerUpType : int
 {
+    FEATHER_WEIGHT,
     TRIPLE_JUMP,
-    SUPER_PUNCH,
     ULTRA_RIGID,
     ULTRA_SPEED,
+    SUPER_PUNCH,
     ULTRA_SLOW,
-    FEATHER_WEIGHT,
+    CONFUSED,
     BAD_LUCKY
 
 }
@@ -47,7 +48,7 @@ public class PowerUp : MonoBehaviour {
     private void Pickup(Collider2D playerDetected)
     {   
         // Catching the player
-        PlayerController player = playerDetected.GetComponent<PlayerController>();
+        PlayerControl player = playerDetected.GetComponent<PlayerControl>();
 
         // Visual pickup effect
         Instantiate(pickupEffect, transform.position, transform.rotation);

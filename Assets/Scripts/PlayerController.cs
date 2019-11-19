@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 10f;
     [SerializeField]
     private float moveInput;
+    private int moveDirection = 1;
     private Collider2D playerCollider;
     private Rigidbody2D rb;
     public Transform groundCheck;
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float jumpDelay = 0;
     public float vel = 0;
+    private int numberOfFalls = 0;
 
 
     //Controller
@@ -42,9 +44,10 @@ public class PlayerController : MonoBehaviour
     public AudioClip[] jumpClips;
     public AudioClip[] dodgeClips;
     public AudioClip doubleJumpClip;
+    
     // Damage
-
     public bool isPunching;
+    private bool superPunch = false;
     public bool damaged;
     public float weakness = 0;
     public bool knockingBack = false;
@@ -78,7 +81,7 @@ public class PlayerController : MonoBehaviour
         
 
         if(!knockingBack){
-            moveInput = Input.GetAxis(xAxis) * speed;
+            moveInput = Input.GetAxis(xAxis) * speed * moveDirection;
 
             if (Input.GetKeyDown(up))
             {
@@ -207,17 +210,24 @@ public class PlayerController : MonoBehaviour
     void Damage(Collider2D other)
     {
         int side = transform.rotation.y == 180 ? -1 : 1;
-        other.gameObject.GetComponent<PlayerController>().ReceiveDamage(gameObject);
+        other.gameObject.GetComponent<PlayerController>().ReceiveDamage(gameObject, superPunch);
     }
 
-    public void ReceiveDamage(GameObject other)
+    public void ReceiveDamage(GameObject other, bool isSuperPunch)
     {
         float direction = other.transform.rotation.y == -1 ? -1 : 1;
 
         Debug.Log(other.gameObject.transform.rotation);
 
-        weakness += 0.1F;
-        float multiplier = (0.5F + weakness) * jumpForce;
+        float multiplier = 0f;
+
+        if(isSuperPunch){
+            weakness += 0.1F; 
+            multiplier = (0.5F + weakness) * jumpForce * 2;
+        } else{
+            weakness += 0.1F;     
+            multiplier = (0.5F + weakness) * jumpForce;
+        }
 
         // Debug.Log("I ("+gameObject.name+") Received Damage!");
 
@@ -251,7 +261,8 @@ public class PlayerController : MonoBehaviour
     {
         if(other.gameObject.name == "SafeArea"){
             isDead = true;
-            Debug.Log(other.gameObject.name + gameObject.name);
+            numberOfFalls += 1;
+            Debug.Log(gameObject.name + "has fall");
         }
 
     }
@@ -296,7 +307,7 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case PowerUpType.ULTRA_SLOW:
-                Debug.Log("UltraSlow!");
+                Debug.Log("UltraSlow condition!");
                 StartCoroutine(this.UltraSlowPowerUp(duration));
                 break;
 
@@ -310,8 +321,12 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(this.FeatherWeightPowerUp(duration));
                 break;
 
+            case PowerUpType.CONFUSED:
+                Debug.Log("Confused condition!");
+                StartCoroutine(this.ConfusedPowerUp(duration));    
+                break;
             case PowerUpType.BAD_LUCKY:
-                Debug.Log("BadLucky condition!");
+                Debug.Log("The floor is Lava condition!");
                 StartCoroutine(this.BadLuckyPowerUp(duration));
                 break;
         }
@@ -325,8 +340,10 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator SuperPunchPowerUp(float time)
     {
-
+        superPunch = true;
         yield return new WaitForSeconds(time);
+        Debug.Log("Unbuff!");
+        superPunch = false;
     }
 
     public IEnumerator UltraRigidPowerUp(float time)
@@ -363,9 +380,20 @@ public class PlayerController : MonoBehaviour
         weakness = save;
     }
 
+    public IEnumerator ConfusedPowerUp(float time)
+    {
+        moveDirection = -1;
+        yield return new WaitForSeconds(time);
+        Debug.Log("Unbuff!");
+        moveDirection = 1;
+    }
+
     public IEnumerator BadLuckyPowerUp(float time)
     {
+
         yield return new WaitForSeconds(time);
-        isDead = true;
+        
+        if(isGrounded)
+            isDead = true;
     }
 }

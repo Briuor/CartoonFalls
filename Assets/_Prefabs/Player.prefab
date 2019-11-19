@@ -43,9 +43,9 @@ GameObject:
   - component: {fileID: 2927493527122217296}
   - component: {fileID: 2927493527122217303}
   - component: {fileID: 2927493527122217302}
-  - component: {fileID: 2927493527122217301}
+  - component: {fileID: 1232828589040883478}
+  - component: {fileID: 8880159479195605277}
   - component: {fileID: 884251833}
-  - component: {fileID: 2032135319907336328}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -183,7 +183,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2927493527122217301
+--- !u!114 &1232828589040883478
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,20 +192,50 @@ MonoBehaviour:
   m_GameObject: {fileID: 2927493527122217300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e45db314284a544a8536b22e665e450, type: 3}
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  m_Actions: {fileID: -944628639613478452, guid: 3e60a439024326c4d825f1331af0b408,
+    type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.InputSystem.PlayerInput+DeviceLostEvent, Unity.InputSystem,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.InputSystem.PlayerInput+DeviceRegainedEvent, Unity.InputSystem,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: dc73e40c-0628-45e9-9ce2-428b4c843511
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &8880159479195605277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2927493527122217300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe983e4cc7bd7d468978a1d7575b405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   isJumping: 0
+  isMoving: 0
   jumpForce: 10
   moveInput: 0
   groundCheck: {fileID: 2927493526389110608}
-  checkRadius: 0.05
   ground:
     serializedVersion: 2
     m_Bits: 256
   extraJumps: 0
-  extraJumpsValue: 1
   jumpDelay: 0
   vel: 0
   player2: 0
@@ -221,13 +251,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ce8d5b3f7eebce5438675a39451ee5d6, type: 3}
   - {fileID: 8300000, guid: c42bb37144a1c984b9f84f499a757d1a, type: 3}
   - {fileID: 8300000, guid: 5816512ef27d8a441b3d6330a7a60680, type: 3}
-  dodgeClips:
-  - {fileID: 8300000, guid: cf1e1cd33b6f14447b4b5a99b5fa5097, type: 3}
-  - {fileID: 8300000, guid: 5ab70f40c0a975342b5fbb0d66d87d87, type: 3}
-  - {fileID: 8300000, guid: f3d1875e39f76f0468bd77000ab23654, type: 3}
-  - {fileID: 8300000, guid: 389b9315f9d9ffa4e83032c0766fac72, type: 3}
+  dodgeClips: []
   doubleJumpClip: {fileID: 8300000, guid: d857a2977167d79408115c2832d74a23, type: 3}
-  powerup: {fileID: 8300000, guid: ab8e67c4ac4a42b40bd507df14affe67, type: 3}
   isPunching: 0
   damaged: 0
   weakness: 0
@@ -331,18 +356,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2032135319907336328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2927493527122217300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0209c81e5cef72b498bc7ddb655f4c4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2927493528253373072
 GameObject:
   m_ObjectHideFlags: 0
