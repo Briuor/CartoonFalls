@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Menu_Personagem.unity
+    guid: 0bb44aed428cec14187d5d9bf6a33160
+  - enabled: 1
+    path: Assets/Scenes/Menu_Mapa.unity
+    guid: e4ec011288a878146a2eea643cfc5897
+  - enabled: 1
+    path: Assets/Scenes/Tela_Inicial.unity
+    guid: f7d02a4df3de5a7418f50a3cf4746ca3
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: ff722818d762b344abf5787c0731a213,
       type: 2}
