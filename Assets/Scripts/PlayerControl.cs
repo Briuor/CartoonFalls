@@ -25,7 +25,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]
     private float jumpDelay = 0;
     public float vel = 0;
-    private int numberOfFalls = 0;
+    public int numberOfFalls = 0;
 
 
     //Controller
