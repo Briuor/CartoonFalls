@@ -37,7 +37,7 @@ public class SmashCSS : MonoBehaviour
     {
 
         gridLayout = GetComponent<GridLayoutGroup>();
-        GetComponent<RectTransform>().sizeDelta = new Vector2(gridLayout.cellSize.x * 5, gridLayout.cellSize.y * 2);
+        GetComponent<RectTransform>().sizeDelta = new Vector2(gridLayout.cellSize.x * 3, gridLayout.cellSize.y);
         RectTransform gridBG = Instantiate(gridBgPrefab, transform.parent).GetComponent<RectTransform>();
         gridBG.transform.SetSiblingIndex(transform.GetSiblingIndex());
         gridBG.sizeDelta = GetComponent<RectTransform>().sizeDelta;
