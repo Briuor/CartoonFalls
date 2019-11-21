@@ -63,6 +63,25 @@ public class PlayerControl : MonoBehaviour
         playerCollider = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
 
+        // guarda quais personagens foram escolhidos pelo player 1 e player 2
+        string personagemPlayer1 = PlayerPrefs.GetString("Player1");
+        string  personagemPlayer2 = PlayerPrefs.GetString("Player2");
+        // renderiza sprite de acordo com o personagem que o player1 escolheu
+        // no lugar dos debugs em baixo coloca o script pra atribuir a sprite ao personagem
+        if(personagemPlayer1 == "ronaldinho")
+            Debug.Log("renderiza ronaldinho player1");
+        else if (personagemPlayer1 == "picapau")
+            Debug.Log("renderiza picapau player1"); 
+        else
+            Debug.Log("renderiza jhonny player1");
+
+        // renderiza sprite de acordo com o personagem que o player2 escolheu
+        if(personagemPlayer2 == "ronaldinho")
+            Debug.Log("renderiza ronaldinho player2");
+        else if (personagemPlayer2 == "picapau")
+            Debug.Log("renderiza picapau player2");
+        else
+            Debug.Log("renderiza jhonny player2");
     }
 
     private void OnMove(InputValue value)
