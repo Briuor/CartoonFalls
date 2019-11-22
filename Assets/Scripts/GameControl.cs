@@ -8,25 +8,18 @@ public class GameControl : MonoBehaviour
     static public float fightTime;
     public GameObject HUD;
     HUDControl gameController;
-    AudioSource mainAudio;
     // Start is called before the first frame update
+    
     void Start()
-    {
-       mainAudio =  main.GetComponent<AudioSource>();
-       fightTime = 5f;
-       gameController = HUD.GetComponent<HUDControl>();
+    {   
+        Time.timeScale = 1f;
+        fightTime = 120f;
+        gameController = HUD.GetComponent<HUDControl>();
     }
 
     // Update is called once per frame
     void Update()
-    {
-        if(PauseMenu.gameIsPaused || FinalScreenMenu.gameIsFinished)
-        {
-            mainAudio.Pause();
-        } else {
-            mainAudio.UnPause();
-        }
-        
+    {      
         fightTime -= Time.deltaTime;
         //Debug.Log("Pausado: " + PauseMenu.gameIsPaused + " - Finalizado:" + FinalScreenMenu.gameIsFinished + " - Time: " + Time.timeScale);
         if(fightTime <= 0)

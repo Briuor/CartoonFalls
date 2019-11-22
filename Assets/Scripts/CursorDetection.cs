@@ -35,7 +35,9 @@ public class CursorDetection : MonoBehaviour
     void Update()
     {
         //CONFIRM
-        if (Keyboard.current.enterKey.wasReleasedThisFrame)
+        if (Keyboard.current.enterKey.wasReleasedThisFrame
+            || ( Gamepad.current != null 
+            &&   Gamepad.current.buttonSouth.wasReleasedThisFrame))
         {
             if (hasTokenPlayer2)
             {

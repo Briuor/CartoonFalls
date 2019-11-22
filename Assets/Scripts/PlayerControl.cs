@@ -69,7 +69,7 @@ public class PlayerControl : MonoBehaviour
         character = !player2 ? PlayerPrefs.GetString("Player1") : PlayerPrefs.GetString("Player2");
 
         switch(character){
-            case "johnny":
+            case "jhonny":
                 anim.runtimeAnimatorController = skins[0];
                 break;
 

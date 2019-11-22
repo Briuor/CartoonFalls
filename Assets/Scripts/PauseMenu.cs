@@ -8,9 +8,10 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool gameIsPaused = false;
     public GameObject pauseMenuUI;
+    public AudioSource mainTheme;
 
 
-    void Update()
+    void FixedUpdate()
     {      
         if(Keyboard.current.spaceKey.wasReleasedThisFrame 
             || ( Gamepad.current != null 
@@ -20,6 +21,14 @@ public class PauseMenu : MonoBehaviour
             gameIsPaused = !gameIsPaused;
             pauseMenuUI.SetActive(gameIsPaused);
             Time.timeScale = !gameIsPaused ? 1f : 0f;
+
+            if(gameIsPaused){
+                 mainTheme.Pause();
+            } else
+            { 
+                mainTheme.UnPause();
+            }
+
         }
     }
 
@@ -28,6 +37,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         gameIsPaused = false;
+         mainTheme.UnPause();
     }
 
     public void LoadMenu()

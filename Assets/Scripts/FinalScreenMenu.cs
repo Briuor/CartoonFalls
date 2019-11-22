@@ -10,6 +10,7 @@ public class FinalScreenMenu : MonoBehaviour
     public GameObject finalMenuUI;
     public Text winnerText;
     public Text drawText;
+    public AudioSource mainTheme;
 
     void Start() {
         Debug.Log("Finalizado:" + FinalScreenMenu.gameIsFinished + " - Time: " + Time.timeScale);
@@ -23,8 +24,8 @@ public class FinalScreenMenu : MonoBehaviour
     public void PlayAgain(){
         gameIsFinished = false;
         finalMenuUI.SetActive(gameIsFinished);
-        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f;
     }
 
     public void LoadMenu()
@@ -42,26 +43,26 @@ public class FinalScreenMenu : MonoBehaviour
     public void FinishGame(int winner){
         
         gameIsFinished = true;
+        mainTheme.Pause();
+
         
         switch(winner){
             case 0:
                 winnerText.text = "";
                 drawText.text = "That's a draw folks!";
-                Time.timeScale = 0f;
-                finalMenuUI.SetActive(true);
                 break;
             case 1:
                 winnerText.text = "Player 1 Wins!";
                 drawText.text = "";
-                Time.timeScale = 0f;
-                finalMenuUI.SetActive(true);
                 break;
             case 2:
                 winnerText.text = "Player 2 Wins!";
                 drawText.text = "";
-                Time.timeScale = 0f;
-                finalMenuUI.SetActive(true);
                 break;
         }
+        
+        Time.timeScale = 0f;
+        finalMenuUI.SetActive(true);
+
     }
 }
