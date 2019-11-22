@@ -13,15 +13,14 @@ public class GameControl : MonoBehaviour
     void Start()
     {
        mainAudio =  main.GetComponent<AudioSource>();
-       fightTime = 120f;
+       fightTime = 5f;
        gameController = HUD.GetComponent<HUDControl>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if(PauseMenu.gameIsPaused)
+        if(PauseMenu.gameIsPaused || FinalScreenMenu.gameIsFinished)
         {
             mainAudio.Pause();
         } else {
@@ -29,7 +28,12 @@ public class GameControl : MonoBehaviour
         }
         
         fightTime -= Time.deltaTime;
-        gameController.UpdateChronometer((int) Mathf.Round(fightTime));
+        //Debug.Log("Pausado: " + PauseMenu.gameIsPaused + " - Finalizado:" + FinalScreenMenu.gameIsFinished + " - Time: " + Time.timeScale);
+        if(fightTime <= 0)
+            gameController.ChooseWinner();
+        else { 
+            gameController.UpdateChronometer((int) Mathf.Round(fightTime));
+        }
         
     }
 }

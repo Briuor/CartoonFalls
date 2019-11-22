@@ -212,7 +212,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: dc73e40c-0628-45e9-9ce2-428b4c843511
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &8880159479195605277
@@ -238,9 +238,14 @@ MonoBehaviour:
   extraJumps: 0
   jumpDelay: 0
   vel: 0
+  numberOfFalls: 0
   player2: 0
   anim: {fileID: 2927493527122217302}
   jumpDust: {fileID: 455103721024249621, guid: 2398187b35b49ec48820b1a6531de70c, type: 3}
+  skins:
+  - {fileID: 22100000, guid: 3e9e5ed1f818d71459e7d3603db2b039, type: 2}
+  - {fileID: 22100000, guid: cc61dfd62d5c94e4f832a0ebdb2344db, type: 2}
+  - {fileID: 22100000, guid: 229ebc238ff6eac49b76139d1b64dd0e, type: 2}
   punchClips:
   - {fileID: 8300000, guid: a110b427ed8dba64ab67aa4d113883f6, type: 3}
   - {fileID: 8300000, guid: 5f0fd1518caae38498d081fafb5a27a1, type: 3}

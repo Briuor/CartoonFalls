@@ -10,6 +10,7 @@ public class HUDControl : MonoBehaviour
     public Text fallText1;
     public Text fallText2;
     public Text timeText;
+    public FinalScreenMenu finalMenu;
 
 
     public void UpdateChronometer(int time)
@@ -34,5 +35,14 @@ public class HUDControl : MonoBehaviour
     {
       fallText1.text = playerStats.numberOfFalls + " FALLS";
       fallText2.text = player2Stats.numberOfFalls + " FALLS";  
+    }
+
+    public void ChooseWinner(){
+        if(playerStats.numberOfFalls < player2Stats.numberOfFalls)
+            finalMenu.FinishGame(1);
+        else if (playerStats.numberOfFalls > player2Stats.numberOfFalls)
+            finalMenu.FinishGame(2);
+        else
+            finalMenu.FinishGame(0);
     }
 }

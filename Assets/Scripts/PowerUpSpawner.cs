@@ -5,8 +5,8 @@ using UnityEngine;
 public class PowerUpSpawner : MonoBehaviour
 {
     public GameObject powerUp;
-    private float spawnRate = 10f;
-    private float _nextSpawn = 2f;
+    private float spawnRate = 15f;
+    private float _nextSpawn = 15f;
 
     void Update()
     {

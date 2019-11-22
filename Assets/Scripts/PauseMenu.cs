@@ -12,14 +12,14 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {      
-        if(Keyboard.current.spaceKey.wasReleasedThisFrame || Gamepad.current.startButton.wasReleasedThisFrame){
-            if(gameIsPaused)
-            {
-                Resume();
-            } else 
-            {
-                Pause();
-            }
+        if(Keyboard.current.spaceKey.wasReleasedThisFrame 
+            || ( Gamepad.current != null 
+            &&   Gamepad.current.startButton.wasReleasedThisFrame))
+        {
+
+            gameIsPaused = !gameIsPaused;
+            pauseMenuUI.SetActive(gameIsPaused);
+            Time.timeScale = !gameIsPaused ? 1f : 0f;
         }
     }
 
@@ -30,17 +30,10 @@ public class PauseMenu : MonoBehaviour
         gameIsPaused = false;
     }
 
-    public void Pause()
-    {
-        pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        gameIsPaused = true;
-    }
-
     public void LoadMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Menu_Personagem");
     }
 
     public void QuitGame()

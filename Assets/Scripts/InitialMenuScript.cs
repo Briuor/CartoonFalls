@@ -14,9 +14,17 @@ public class InitialMenuScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.spaceKey.isPressed)
+        if (Keyboard.current.spaceKey.wasReleasedThisFrame 
+            || ( Gamepad.current != null 
+            &&   Gamepad.current.startButton.wasReleasedThisFrame))
         {
             SceneManager.LoadScene("Menu_Personagem", LoadSceneMode.Single);
-        }
+        } else if (Keyboard.current.escapeKey.wasReleasedThisFrame 
+            || ( Gamepad.current != null 
+            &&   Gamepad.current.selectButton.wasReleasedThisFrame))
+            {
+                Debug.Log("Quit Game");
+                Application.Quit();
+            }
     }
 }

@@ -36,6 +36,8 @@ public class PlayerControl : MonoBehaviour
     //Animator
     public Animator anim;
     public Transform jumpDust;
+    public AnimatorOverrideController[] skins;
+    private string character;
 
     //Sounds
     public AudioClip[] punchClips;
@@ -57,31 +59,29 @@ public class PlayerControl : MonoBehaviour
 
     void Start()
     {
-
+        
         extraJumps = extraJumpsValue;
         isGrounded = false;
         playerCollider = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
+        
 
-        // guarda quais personagens foram escolhidos pelo player 1 e player 2
-        string personagemPlayer1 = PlayerPrefs.GetString("Player1");
-        string  personagemPlayer2 = PlayerPrefs.GetString("Player2");
-        // renderiza sprite de acordo com o personagem que o player1 escolheu
-        // no lugar dos debugs em baixo coloca o script pra atribuir a sprite ao personagem
-        if(personagemPlayer1 == "ronaldinho")
-            Debug.Log("renderiza ronaldinho player1");
-        else if (personagemPlayer1 == "picapau")
-            Debug.Log("renderiza picapau player1"); 
-        else
-            Debug.Log("renderiza jhonny player1");
+        character = !player2 ? PlayerPrefs.GetString("Player1") : PlayerPrefs.GetString("Player2");
 
-        // renderiza sprite de acordo com o personagem que o player2 escolheu
-        if(personagemPlayer2 == "ronaldinho")
-            Debug.Log("renderiza ronaldinho player2");
-        else if (personagemPlayer2 == "picapau")
-            Debug.Log("renderiza picapau player2");
-        else
-            Debug.Log("renderiza jhonny player2");
+        switch(character){
+            case "johnny":
+                anim.runtimeAnimatorController = skins[0];
+                break;
+
+            case "picapau":
+                anim.runtimeAnimatorController = skins[1];
+                break;
+
+            case "ronaldinho":
+                anim.runtimeAnimatorController = skins[2];
+                break;
+        }
+
     }
 
     private void OnMove(InputValue value)
@@ -154,8 +154,6 @@ public class PlayerControl : MonoBehaviour
             multiplier = (0.5F + weakness) * jumpForce;
         }
 
-        // Debug.Log("I ("+gameObject.name+") Received Damage!");
-
         rb.AddForce(new Vector2(1,4) * multiplier);
         StartCoroutine(Knockback(direction));
         if(isGrounded && !knockingBack){
@@ -211,6 +209,11 @@ public class PlayerControl : MonoBehaviour
         }else{
             anim.SetBool("isJumping", false);
             anim.SetBool("isFalling", false);
+        }
+        if(isPunching){
+            anim.SetBool("isPunching", true);
+        }else{
+            anim.SetBool("isPunching", false);
         }
     }
 

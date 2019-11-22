@@ -35,7 +35,7 @@ public class CursorDetection : MonoBehaviour
     void Update()
     {
         //CONFIRM
-        if (Keyboard.current.zKey.wasReleasedThisFrame)
+        if (Keyboard.current.enterKey.wasReleasedThisFrame)
         {
             if (hasTokenPlayer2)
             {
